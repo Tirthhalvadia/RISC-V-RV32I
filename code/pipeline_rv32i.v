@@ -5,6 +5,8 @@ module pipeline_rv32i(
     input rst
     );
 
+    wire flush;
+
     wire stall;
     //fetch stage
     wire [31:0] pc_F, instruction_F;
@@ -51,10 +53,12 @@ module pipeline_rv32i(
     reg mem_to_reg_W, reg_write_W;
 
     always @(*) begin
-        pc_sel_f = branch_sel_E | (jump_E == 01) | (jump_E == 10);
+        pc_sel_f = branch_sel_E | (jump_E == 2'b01) | (jump_E == 2'b10);
         pc_nxt_f = (jump_E == 2'b01 || jump_E == 2'b10) ? jump_target_E : branch_target_E;
     end
 
+    assign flush = (branch_sel_E || jump_E);
+    
     //Fetch Stage Instantiation
     fetch fetch_inst(
         .clk(clk),
@@ -62,7 +66,7 @@ module pipeline_rv32i(
         .stall(stall),
         .pc_sel(pc_sel_f),
         .pc_nxt(pc_nxt_f),
-        .pc_f(pc_F),
+        .pc_out(pc_F),
         .instruction(instruction_F)
     );
 
@@ -140,9 +144,7 @@ module pipeline_rv32i(
         .stall(stall)
     );
 
-
-
-    always @(posedge clk or posedge rst) begin
+    always @(posedge clk) begin
         if (rst) begin
             //reset all pipelined registers
             pc_sel_f <= 32'h00000000;
@@ -180,7 +182,7 @@ module pipeline_rv32i(
             alu_src_E <= alu_src_D;
             mem_read_E <= mem_read_D;
             mem_to_reg_E <= mem_to_reg_D;
-            jump_E <= jump_D;
+
             mem_write_E <= mem_write_D;
             branch_E <= branch_D;
             reg_write_E <= reg_write_o;
@@ -212,8 +214,14 @@ module pipeline_rv32i(
             end else begin
                 instruction_E <= instruction_D;
                 pc_E <= pc_D;
+                jump_E <= jump_D;
+            end
+            if (flush) begin
+                instruction_D <= 32'h00000013;  // addi x0, x0, 0 (NOP)
+                instruction_E <= 32'h00000013;  // addi x0, x0, 0 (NOP)
+            end else if (!stall) begin
+                instruction_D <= instruction_F;
             end
         end
     end
-
 endmodule

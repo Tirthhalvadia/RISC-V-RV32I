@@ -13,7 +13,7 @@ module risc_v_tb;
         rst <= 1'b1;
         #200;
         rst <= 1'b0;
-        #2000;
+        #9000;
         $finish;    
     end
 

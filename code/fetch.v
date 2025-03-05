@@ -4,7 +4,7 @@ module fetch (
     input stall,
     input pc_sel,
     input [31:0] pc_nxt,
-    output [31:0] pc_f,
+    output [31:0] pc_out,
     output [31:0] instruction
 );
     // Program Counter Module
@@ -14,13 +14,13 @@ module fetch (
         .stall(stall),
         .pc_sel(pc_sel),
         .pc_nxt(pc_nxt),
-        .pc_out(pc_f)
+        .pc_out(pc_out)
     );
 
     // Instruction Memory Module
     Instruction_memory imem_inst (
         .rst(rst),
-        .address(pc_f),
+        .address(pc_out),
         .rd(instruction)
     );
     

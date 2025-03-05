@@ -8,13 +8,19 @@ module hazard_detection(
     );
 
 always @(*) begin
-    if (((rs1_D==rd_E) && reg_write_E)|| 
-    ((rs1_D==rd_M) && reg_write_M)|| 
-    ((rs1_D==rd_W) && reg_write_W)|| 
-    ((rs2_D==rd_E) && reg_write_E)|| 
-    ((rs2_D==rd_M) && reg_write_M)||
-    ((rs2_D==rd_W) && reg_write_W)) begin
-        stall = 1'b1;  
+    if (
+        ((rs1_D != 0) && (
+            (rs1_D == rd_E && reg_write_E) || 
+            (rs1_D == rd_M && reg_write_M) || 
+            (rs1_D == rd_W && reg_write_W)
+        )) ||
+        ((rs2_D != 0) && (
+            (rs2_D == rd_E && reg_write_E) || 
+            (rs2_D == rd_M && reg_write_M) || 
+            (rs2_D == rd_W && reg_write_W)
+        ))
+    ) begin
+        stall = 1'b1;
     end else begin
         stall = 1'b0;     
     end

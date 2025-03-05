@@ -27,7 +27,7 @@ module data_memory(
     integer i;
     //sequential logic
 
-    always @(posedge clk or posedge rst) begin
+    always @(posedge clk) begin
         if (rst) begin
              for (i = 0; i < 1023; i = i + 1) begin
                 memory[i] <= 8'b0;
@@ -35,9 +35,9 @@ module data_memory(
         end else begin
                 if (mem_write) begin
                     case (funct3)
-                        `MEM_SB: memory[address] = write_data [7:0]; 
-                        `MEM_SW: {memory[address+1],memory[address]} = write_data [15:0];
-                        `MEM_SW: {memory[address+3],memory[address+2],memory[address+1],memory[address]} = write_data [31:0];
+                        `MEM_SB: memory[address] <= write_data [7:0]; 
+                        `MEM_SH: {memory[address+1],memory[address]} <= write_data [15:0];
+                        `MEM_SW: {memory[address+3],memory[address+2],memory[address+1],memory[address]} <= write_data;
                         default:; 
                     endcase
                 end

@@ -21,6 +21,8 @@ module execute(
         .rs1(rs1),
         .src2(alu_input2),
         .alu_control(alu_control),
+        .jump(jump),
+        .pc(pc),
         .alu_result(alu_result)
     );
 
@@ -33,6 +35,6 @@ module execute(
     );
 
     assign branch_target = pc+imm_out;
-    assign jump_target = (jump == 2'b01)?alu_result:branch_target; // ?JALR = 01 :JAL = 10
+    assign jump_target = (jump == 2'b01)? (rs1 + alu_input2) & 32'hfffffffe:branch_target; // ?JALR = 01:JAL = 10  //so that for JALR instructions address is always multiple of 2 
 
 endmodule

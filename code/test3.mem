@@ -1,0 +1,15 @@
+00500293 // addi x5, x0, 5       // x5 = 5
+00600313 // addi x6, x0, 6       // x6 = 6
+018000EF // jal  x1, 24          // Jump to mem[8], x1 = 0x0C (PC+4)
+00700393 // addi x7, x0, 7       // (shouldn't execute) x7 = 7
+00800413 // addi x8, x0, 8       // (shouldn't execute) x8 = 8
+00900493 // addi x9, x0, 9       // (shouldn't execute) x9 = 9
+00A00513 // addi x10, x0, 10     // (shouldn't execute) x10 = 10
+00B00593 // addi x11, x0, 11     // (shouldn't execute) x11 = 11
+00628633 // add  x12, x5, x6     // x12 = x5 + x6 = 11
+03230313 // addi x6, x6, 50      // x6 = x6 + 50 = 56
+000306E7 // jalr x13, x6, 0      // Jump to address in x6 (56), x13 = 0x2C (PC+4)
+00F00693 // addi x13, x0, 15     // (shouldn't execute) x13 = 15
+01000713 // addi x14, x0, 16     // (shouldn't execute) x14 = 16
+01100793 // addi x15, x0, 17     // (shouldn't execute) x15 = 17
+00128293 // addi x5, x5, 1       // x5 = x5 + 1 = 6

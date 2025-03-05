@@ -20,8 +20,8 @@ module opcode_decoder(
             7'b1100011: controls = 10'b1_0_0_0_0_0_00_01; // B-type
             7'b1101111: controls = 10'b0_0_0_0_0_1_10_00; // J-type (JAL)
             7'b1100111: controls = 10'b0_0_0_0_1_1_01_00; // I-type (JALR)
-            7'b0110111: controls = 10'b0_0_0_0_1_1_00_00; // U-type (LUI)
-            7'b0010111: controls = 10'b0_0_0_0_1_1_00_00; // U-type (AUIPC)
+            7'b0110111: controls = 10'b0_0_0_0_1_1_00_11; // U-type (LUI)
+            7'b0010111: controls = 10'b0_0_0_0_1_1_00_11; // U-type (AUIPC)
             default:    controls = 10'b0_0_0_0_0_0_00_00;
         endcase
     end

@@ -32,6 +32,7 @@ module decode (
         .alu_op(alu_op_wire),
         .funct3(instruction[14:12]),
         .funct7(instruction[31:25]),
+        .opcode(instruction[6:0]),
         .alu_control(alu_control)
     );
 

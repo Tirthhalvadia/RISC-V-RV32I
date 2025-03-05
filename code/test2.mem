@@ -1,0 +1,23 @@
+00500293 // addi x5, x0, 5       // x5 = 5
+00600313 // addi x6, x0, 6       // x6 = 6
+006283B3 // add  x7, x5, x6      // x7 = x5 + x6 = 11
+40628433 // sub  x8, x5, x6      // x8 = x5 - x6 = -1
+0062E4B3 // or   x9, x5, x6      // x9 = x5 | x6 = 7
+0062C533 // xor  x10, x5, x6     // x10 = x5 ^ x6 = 3
+0055A593 // slti x11, x11, 5     // x11 = (x11 < 5) ? 1 : 0 = 1 (assuming x11 was 0)
+00B02023 // sw   x11, 0(x0)      // Store x11 (1) to address 0
+00002603 // lw   x12, 0(x0)      // Load from address 0 to x12 (should be 1)
+00864663 // blt  x12, x8, 12     // Branch if x12 < x8 (1 < -1, shouldn't branch)
+00564E63 // blt  x12, x5, 28     // Branch if x12 < x5 (1 < 5, should branch to mem[17])
+00100E93 // addi x29, x0, 1      // (shouldn't execute) x29 = 1
+00200F13 // addi x30, x0, 2      // (shouldn't execute) x30 = 2
+00300F93 // addi x31, x0, 3      // (shouldn't execute) x31 = 3
+FFF00293 // addi x5, x0, -1      // (shouldn't execute) x5 = -1
+FFF00313 // addi x6, x0, -1      // (shouldn't execute) x6 = -1
+01F003B3 // add  x7, x0, x31     // (shouldn't execute) x7 = x31 = 3
+00300693 // addi x13, x0, 3      // (should execute) x13 = 3
+00068713 // addi x14, x13, 0     // x14 = x13 = 3
+00E6A023 // sw   x14, 0(x13)     // Store x14 (3) to address in x13 (3)
+0006A783 // lw   x15, 0(x13)     // Load from address in x13 (3) to x15 (should be 3)
+00F6C863 // blt  x13, x15, 16    // Branch if x13 < x15 (3 < 3, shouldn't branch)
+0000006F // jal  x0, 0           // Jump to current instruction (infinite loop)
