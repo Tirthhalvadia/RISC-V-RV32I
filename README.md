@@ -29,5 +29,9 @@ The design has been rigorously tested using multiple instruction sets covering a
 
 ### Prerequisites
 - **Simulation Tools:** e.g., ModelSim, Vivado, or any compatible simulation environment.
-- **Synthesis Tools:** (Optional) for FPGA implementation.
 - **Basic Knowledge:** Understanding of the RISCV architecture and pipelined processor design.
+
+## References
+1. **Computer Architecture, Sixth Edition: A Quantitative Approach** – Book by John L. Hennessy and David A. Patterson, covering modern processor architectures, including pipelining concepts applied in this project.
+2. **RISCV_CARD.pdf** – Summary of the RISC-V instruction set architecture.
+3. **Design and Implementation of 32-bit RISC-V Processor Using Verilog** – Research paper detailing the methodology for implementing a RISC-V processor in Verilog.
