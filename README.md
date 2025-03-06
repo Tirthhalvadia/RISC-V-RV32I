@@ -22,7 +22,7 @@ Below is a high-level view of the processor architecture.
 
 ## Testing
 
-The design has been rigorously tested using multiple instruction sets covering arithmetic, logical operations, memory access, and control flow. Detailed test cases can be found in the [TESTS.md](TESTS.md) file.
+The design has been rigorously tested using multiple instruction sets covering arithmetic, logical operations, memory access, and control flow. Detailed test cases can be found in the [TESTS.md](tests.md) file.
 
 
 ## Getting Started
