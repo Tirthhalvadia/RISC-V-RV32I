@@ -2,10 +2,10 @@
 
 This document outlines the test cases used to verify the functionality of the RISCV-RV32I 5-Stage Pipelined Processor. Each test case targets different aspects of the processor, including arithmetic operations, logical operations, memory access, branching, and control flow.
 
-The corresponding hex code files are included in the `Code` directory:
-- `Code/test1.mem`
-- `Code/test2.mem`
-- `Code/test3.mem`
+The corresponding hex code files are included in the `code` directory:
+- `code/test1.mem`
+- `code/test2.mem`
+- `code/test3.mem`
 
 ---
 
@@ -34,6 +34,9 @@ sw   x12, 0(x6)      # Store x12 to memory at x6
 lw   x13, 0(x6)      # Load x13 from memory
 auipc x17, 191       # x17 = PC + (191 << 12)
 ```
+
+**Waveform Result:**
+![Test1 Waveform](Images/test1.png)
 
 ---
 
@@ -64,6 +67,9 @@ blt  x13, x15, 16    # Branch if x13 < x15 (shouldn't branch)
 jal  x0, 0           # Jump to current instruction (infinite loop)
 ```
 
+**Waveform Result:**
+![Test2 Waveform](Images/test2.png)
+
 ---
 
 ## Test Set 3: Jump and Link Operations
@@ -91,11 +97,14 @@ addi x15, x0, 17     # (shouldn't execute) x15 = 17
 addi x5, x5, 1       # x5 += 1
 ```
 
+**Waveform Result:**
+![Test3 Waveform](Images/test3.png)
+
 ---
 
 ## How to Run the Tests
 1. Ensure that the processor simulation environment is correctly set up.
-2. The `Instruction_memory.v` module in the `Code` directory is configured to load a `.mem` file into memory:
+2. The `Instruction_memory.v` module in the `code` directory is configured to load a `.mem` file into memory:
    ```verilog
    
    initial begin
@@ -112,6 +121,9 @@ addi x5, x5, 1       # x5 += 1
 
 ## Conclusion
 
-These test cases validate essential functionalities of the processor, ensuring correct execution of arithmetic, logical, memory, and control flow operations. If you encounter any discrepancies, verify the instruction execution flow and debugging outputs.
+These test cases systematically verify the execution of fundamental instructions in the RV32I (RISC-V 32-bit Integer) instruction set, ensuring the correct implementation of arithmetic, logical, memory access, and control flow operations. The RV32I architecture forms the foundation of many RISC-V processors, and validating its instruction set is crucial for building reliable and efficient CPU designs. By running these test cases, we confirm the functional correctness of the 5-stage pipelined processor, ensuring that it adheres to the expected behavior defined by the RISC-V ISA. Any deviations in the waveform results should be carefully analyzed to debug potential pipeline hazards, forwarding issues, or incorrect instruction decoding.
+
+This testing methodology can be extended to validate additional instructions and custom extensions if required. Further optimizations, such as branch prediction, can be incorporated to enhance processor performance.
+
 
 
