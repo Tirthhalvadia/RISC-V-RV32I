@@ -32,6 +32,6 @@ The design has been rigorously tested using multiple instruction sets covering a
 - **Basic Knowledge:** Understanding of the RISCV architecture and pipelined processor design.
 
 ## References
-1. **Computer Architecture, Sixth Edition: A Quantitative Approach** – Book by John L. Hennessy and David A. Patterson, covering modern processor architectures, including pipelining concepts applied in this project.
-2. **RISCV_CARD.pdf** – Summary of the RISC-V instruction set architecture.
-3. **Design and Implementation of 32-bit RISC-V Processor Using Verilog** – Research paper detailing the methodology for implementing a RISC-V processor in Verilog.
+1. **Computer Architecture, Sixth Edition: A Quantitative Approach** – [Book Website](https://www.elsevier.com/books/computer-architecture/hennessy/978-0-12-811905-1)  
+2. **RISC-V Instruction Set Cheat Sheet** – [RISCV_CARD.pdf](https://www.cs.sfu.ca/~ashriram/Courses/CS295/assets/notebooks/RISCV/RISCV_CARD.pdf)  
+
