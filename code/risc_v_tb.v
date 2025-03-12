@@ -17,10 +17,7 @@ module risc_v_tb;
         $finish;    
     end
 
-    initial begin
-        $dumpfile("dump.vcd");
-        $dumpvars(0);
-    end
+
 
     pipeline_rv32i dut (.clk(clk), .rst(rst));
 endmodule
