@@ -16,8 +16,5 @@ module risc_v_tb;
         #9000;
         $finish;    
     end
-
-
-
     pipeline_rv32i dut (.clk(clk), .rst(rst));
 endmodule
