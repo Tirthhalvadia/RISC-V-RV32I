@@ -18,7 +18,7 @@ This project is a design and implementation of a RISCV-RV32I 5 stage pipelined p
 ## Architecture
 Below is a high-level view of the processor architecture.
 
-![Architecture Diagram](Images/RiscV_architecture.jpg)
+![Architecture Diagram](Images/RISC-V_Architecture.jpg)
 
 ## Testing
 
