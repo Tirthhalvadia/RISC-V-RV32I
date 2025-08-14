@@ -22,14 +22,14 @@ module data_memory(
     output reg [31:0] read_data
     );
 
-    // Memory array (1KB memory)    
-    reg [7:0] memory [0:1023];
+    // Memory array (256B memory)    
+    (* ram_style = "block" *) reg [7:0] memory [0:255];
     integer i;
     //sequential logic
 
     always @(posedge clk) begin
         if (rst) begin
-             for (i = 0; i < 1023; i = i + 1) begin
+             for (i = 0; i < 256; i = i + 1) begin
                 memory[i] <= 8'b0;
             end 
         end else begin

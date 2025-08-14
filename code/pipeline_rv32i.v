@@ -2,7 +2,13 @@
 
 module pipeline_rv32i(
     input clk,
-    input rst
+    input rst,
+    output [31:0] pc_out,
+    output [4:0] rd_WB,
+    output [31:0] write_data_WB,
+    output reg_write_WB,
+    output [31:0] instruction_decode,
+    output [31:0] instruction_execute
     );
 
     wire flush;
@@ -32,11 +38,11 @@ module pipeline_rv32i(
     
     //Fetch stage
     reg [31:0] pc_nxt_f;
-    reg pc_sel_f;
+    wire pc_sel_f;
 
     //Decode stage
-    reg [31:0] instruction_D, pc_D, write_data_D;
-    reg reg_write_D;
+    reg [31:0] instruction_D, pc_D; //write_data_D;
+    // reg reg_write_D;
     
     //Execute stage
     reg [31:0] instruction_E, pc_E, rs1_E, rs2_E, imm_out_E;
@@ -53,10 +59,10 @@ module pipeline_rv32i(
     reg mem_to_reg_W, reg_write_W;
 
     always @(*) begin
-        pc_sel_f = branch_sel_E | (jump_E == 2'b01) | (jump_E == 2'b10);
         pc_nxt_f = (jump_E == 2'b01 || jump_E == 2'b10) ? jump_target_E : branch_target_E;
     end
 
+    assign pc_sel_f = branch_sel_E | (jump_E == 2'b01) | (jump_E == 2'b10);
     assign flush = (branch_sel_E || jump_E);
     
     //Fetch Stage Instantiation
@@ -147,10 +153,10 @@ module pipeline_rv32i(
     always @(posedge clk) begin
         if (rst) begin
             //reset all pipelined registers
-            pc_sel_f <= 32'h00000000;
+            //pc_sel_f <= 32'h00000000;
             instruction_D <= 32'b0;
             pc_D <= 32'b0;
-            write_data_D <= 32'b0;
+            //write_data_D <= 32'b0;
             instruction_E <= 32'b0;
             pc_E <= 32'b0;
             rs1_E <= 32'b0;
@@ -204,8 +210,8 @@ module pipeline_rv32i(
             reg_write_W <= reg_write_M;
 
             //other
-            write_data_D <= write_data_W;
-            reg_write_D <= reg_write_W;
+            // write_data_D <= write_data_W;
+            // reg_write_D <= reg_write_W;
             //stalling logic
             if (stall) begin
                 instruction_D <= instruction_D;
@@ -224,4 +230,12 @@ module pipeline_rv32i(
             end
         end
     end
+
+assign pc_out = pc_F;
+assign rd_WB = instruction_W[11:7];
+assign write_data_WB = write_data_W;
+assign reg_write_WB = reg_write_W;
+assign instruction_decode = instruction_D;
+assign instruction_execute = instruction_E;
+
 endmodule
