@@ -1,4 +1,8 @@
-module fetch (
+module fetch 
+#(
+    parameter MEMFILE = "test1.mem"
+)
+(
     input clk,
     input rst,
     input stall,
@@ -18,7 +22,7 @@ module fetch (
     );
 
     // Instruction Memory Module
-    Instruction_memory imem_inst (
+    Instruction_memory #(.MEMFILE(MEMFILE)) imem_inst (
         .rst(rst),
         .address(pc_out),
         .rd(instruction)

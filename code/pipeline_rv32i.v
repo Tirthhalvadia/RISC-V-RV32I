@@ -1,6 +1,10 @@
 `timescale 1ns / 1ps
 
-module pipeline_rv32i(
+module pipeline_rv32i
+#(
+    parameter MEMFILE = "test1.mem"
+)
+(
     input clk,
     input rst,
     output [31:0] pc_out,
@@ -66,7 +70,7 @@ module pipeline_rv32i(
     assign flush = (branch_sel_E || jump_E);
     
     //Fetch Stage Instantiation
-    fetch fetch_inst(
+    fetch #(.MEMFILE(MEMFILE)) fetch_inst(
         .clk(clk),
         .rst(rst),
         .stall(stall),

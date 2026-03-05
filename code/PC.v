@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module pc #()(
+module pc (
     input clk,
     input rst,
     input stall,

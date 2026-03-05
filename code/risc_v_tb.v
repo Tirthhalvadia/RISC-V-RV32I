@@ -1,6 +1,9 @@
 `timescale 1ns / 1ps
 
-module risc_v_tb;
+module risc_v_tb 
+#(
+    parameter MEMFILE = "test1.mem" 
+);
 
     reg clk=0, rst;
     
@@ -16,5 +19,6 @@ module risc_v_tb;
         #9000;
         $finish;    
     end
-    pipeline_rv32i dut (.clk(clk), .rst(rst));
+    pipeline_rv32i #(.MEMFILE(MEMFILE)) dut (.clk(clk), .rst(rst));
+
 endmodule
